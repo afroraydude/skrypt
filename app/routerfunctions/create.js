@@ -28,11 +28,12 @@ exports.user = function (req, res) {
 }
 
 exports.post = function(req,res) {
-  const content = req.body.content
+  let content = req.body.content
   let token = req.cookies.token || req.body.token
   if (token && auth.internalVerify(token)) {
     const user = auth.getToken(token)
     console.log(user)
+    content = escape(content)
     const post = new postModel({author: user.id, content: content })
     post.save(function(err, post) {
       if (err) throw err

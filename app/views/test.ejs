@@ -1,0 +1,72 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/bootstrap.min.js"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png?v=XBJqWW7nbx">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png?v=XBJqWW7nbx">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png?v=XBJqWW7nbx">
+<link rel="manifest" href="/favicons/site.webmanifest?v=XBJqWW7nbx">
+<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg?v=XBJqWW7nbx" color="#18be2b">
+<link rel="shortcut icon" href="/favicons/favicon.ico?v=XBJqWW7nbx">
+<meta name="apple-mobile-web-app-title" content="Nozomi">
+<meta name="application-name" content="Nozomi">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/favicons/browserconfig.xml?v=XBJqWW7nbx">
+<meta name="theme-color" content="#ffffff">    <!-- Main Quill library -->
+    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+    <!-- Theme included stylesheets -->
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+    <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+    <link rel="stylesheet" href="/js/ui/trumbowyg.min.css">
+</head>
+<body>
+
+<div class="page">
+    <div id="editor-container"  style="display:none;" class="container">
+            <script src="/js/trumbowyg.min.js"></script>
+            <div id="wysiwyg"></div>
+            <script>
+                $('#wysiwyg').trumbowyg({semantic: false});
+                </script>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#editor-container').show();
+        $('#msg').hide();
+        $("#submit").click(function(){
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "/nozomi/page/post",
+                "method": "POST",
+                "headers": {
+                    "content-type": "application/x-www-form-urlencoded",
+                    "cache-control": "no-cache",
+                    "postman-token": "53f41ebf-078d-4794-e411-e715a8e69225"
+                },
+                "data": {
+                    "title": $('#title').val(),
+                    "url": $('#url').val(),
+                                        "content": $('#wysiwyg').trumbowyg('html'),
+                    "template": $('#template').val()
+                }
+            }
+
+            $.ajax(settings).done(function (response) {
+                window.location.reload();
+            });
+        });
+    });
+</script>
+</div>
+</body>
+</html>

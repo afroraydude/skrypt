@@ -2,15 +2,19 @@
 <html>
 	<head><% include head %>
 		<title>SKRYPT</title>
+    <link rel="stylesheet" href="/js/ui/trumbowyg.min.css">
 	</head>
 	<body><% include nav %>
-  <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 		<div class="container">
 			<div class="row">
 				<h1>Welcome home!</h1>
 			</div>
 			<div class="row post-homescreen">
-                <textarea id="test" class="form-control"></textarea>
+            <script src="/js/trumbowyg.min.js"></script>
+                <div id="wysiwyg"></div>
+            <script>
+                $('#wysiwyg').trumbowyg({semantic: false});
+                </script>
                 <button id="target" class="btn btn-lg btn-primary btn-block">Post</button>
 			</div>
 			<div class="row">
